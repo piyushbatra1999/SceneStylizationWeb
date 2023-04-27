@@ -53,13 +53,14 @@ crop='store_true'
 save_ext='.jpg'
 output_path='output'
 preserve_color='store_true'
-alpha=1.0
 
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-# device = torch.device("cpu")
 
 print(device)
+
+def device_info():
+    return device
 
 
 vgg = StyTR.vgg
@@ -119,6 +120,4 @@ def style_transfer(content_path,style_path,content_size=512,style_size=512,crop=
         output= network(content,style)[0]
     output = output.cpu()
     print(f'Style transferred!!')
-            
-    print('Saving output')
     save_image(output, 'output/output.jpg')
